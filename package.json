@@ -1,0 +1,22 @@
+{
+  "name": "Srighal-Diary-WebServ",
+  "version": "0.0.0",
+  "description": "Web Service for Srighal Diary Android Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuganksinghal/Srighal-Diary-webserv"
+  },
+  "author": "Yugank Singhal and Mihir Srivastava",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/yuganksinghal/Srighal-Diary-webserv/issues"
+  },
+  "dependencies": {
+    "express": "~4.13.3",
+    "body-parser": "~1.14.1"
+  }
+}
