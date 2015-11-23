@@ -13,7 +13,7 @@ pg.connect(db, function(err, client){
 
     client.query('DROP TABLE diary');
     client
-    .query('CREATE TABLE diary(TITLE CHAR(100) NOT NULL, ENTRY_CONTENT TEXT, GEOCACHE TEXT, ENTRY_DATE DATE);');
+    .query('CREATE TABLE diary(TITLE CHAR(100) NOT NULL, ENTRY TEXT, GEOCACHE TEXT, ENTRYDATE TEXT);');
     
     app.get('/getentries', function(req,res){
         console.log("GET");
