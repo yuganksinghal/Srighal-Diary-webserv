@@ -15,7 +15,7 @@ pg.connect(db, function(err, client){
     client
     .query('CREATE TABLE diary(TITLE CHAR(100) NOT NULL, ENTRY TEXT, GEOCACHE TEXT, ENTRYDATE TEXT);');
     
-    app.get('/getentries', function(req,res){
+    app.get('/entry/all', function(req,res){
         console.log("GET");
         var queryResult;
         client.query('SELECT * FROM diary', function(err, result){
@@ -25,7 +25,7 @@ pg.connect(db, function(err, client){
         });
     });
 
-    app.post('/submitentry', function(req,res){
+    app.post('/entry/save', function(req,res){
         console.log("POST");
         console.log(req.body);
         var entryObject = req.body;
