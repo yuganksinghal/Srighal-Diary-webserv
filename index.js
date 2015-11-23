@@ -31,8 +31,8 @@ pg.connect(db, function(err, client){
         var entryObject = req.body;
         entryObject.title=entryObject.title.replace(/'/g, "''");
         entryObject.entry=entryObject.entry.replace(/'/g, "''");
-        console.log("INSERT INTO diary VALUES(\'"+ entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entryDate+'\');');
-        client.query('INSERT INTO diary VALUES(\''+ entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entryDate+'\');');
+        console.log("INSERT INTO diary VALUES(\'"+ entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entrydate+'\');');
+        client.query('INSERT INTO diary VALUES(\''+ entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entrydate+'\');');
         res.sendStatus(200);
     });
 });
