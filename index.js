@@ -11,9 +11,9 @@ var db = process.env.DATABASE_URL || 'postgres://vdmhzgburvczes:4a6UvEgPzqmLNlwA
 pg.connect(db, function(err, client){
     if (err) throw err;
 
-    //client.query('DROP TABLE diary');
-    //client
-    //.query('CREATE TABLE diary(TITLE CHAR(100) NOT NULL, ENTRY_CONTENT TEXT, GEOCACHE TEXT, ENTRY_DATE DATE);');
+    client.query('DROP TABLE diary');
+    client
+    .query('CREATE TABLE diary(TITLE CHAR(100) NOT NULL, ENTRY_CONTENT TEXT, GEOCACHE TEXT, ENTRY_DATE DATE);');
     
     app.get('/getentries', function(req,res){
         console.log("GET");
