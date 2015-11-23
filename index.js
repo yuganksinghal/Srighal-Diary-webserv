@@ -10,21 +10,31 @@ var db = process.env.DATABASE_URL || 'postgres://vdmhzgburvczes:4a6UvEgPzqmLNlwA
 
 pg.connect(db, function(err, client){
     if (err) throw err;
-    console.log('Connected to postgres! Getting schemas...');
 
-    client.query('DROP TABLE DIARY');
-    client
-    .query('CREATE TABLE DIARY(ID SERIAl PRIMARY KEY NOT NULL, TITLE CHAR(100) NOT NULL, DIARY_CONTENT TEXT);');
-});
+    //client.query('DROP TABLE diary');
+    //client
+    //.query('CREATE TABLE diary(TITLE CHAR(100) NOT NULL, ENTRY_CONTENT TEXT, GEOCACHE TEXT, ENTRY_DATE DATE);');
+    
+    app.get('/getentries', function(req,res){
+        console.log("GET");
+        var queryResult;
+        client.query('SELECT * FROM diary', function(err, result){
+            queryResult=result.rows;
+            console.log(result.rows);
+            res.send(JSON.stringify(queryResult));
+        });
+    });
 
-app.get('/', function(req,res){
-    res.send(200);
-});
-
-app.post('/submitentry', function(req,res){
-    console.log("POST");
-    console.log(req.body);
-    res.send(200);
+    app.post('/submitentry', function(req,res){
+        console.log("POST");
+        console.log(req.body);
+        var entryObject = req.body;
+        entryObject.title=entryObject.title.replace(/'/g, "''");
+        entryObject.entry=entryObject.entry.replace(/'/g, "''");
+        console.log("INSERT INTO diary VALUES(\'"+ entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entryDate+'\');');
+        client.query('INSERT INTO diary VALUES(\''+ entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entryDate+'\');');
+        res.sendStatus(200);
+    });
 });
 
 var port = process.env.PORT || 3000;
