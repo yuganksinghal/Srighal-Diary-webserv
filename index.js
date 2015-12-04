@@ -12,7 +12,7 @@ pg.connect(db, function(err, client){
     if (err) throw err;
 
     //client.query('DROP TABLE diary');
-    client.query('CREATE TABLE diary(ID CHAR(36) PRIMARY KEY NOT NULL,TITLE CHAR(100) NOT NULL, ENTRY TEXT, GEOCACHE TEXT, ENTRYDATE TEXT);');
+    //client.query('CREATE TABLE diary(ID CHAR(36) PRIMARY KEY NOT NULL,TITLE CHAR(100) NOT NULL, ENTRY TEXT, GEOCACHE TEXT, ENTRYDATE TEXT);');
     
     app.get('/entry/all', function(req,res){
         console.log("GET");
@@ -50,7 +50,7 @@ pg.connect(db, function(err, client){
         res.sendStatus(200);
     });
     
-        app.post('/entry/:id/delete', function(req,res){
+    app.post('/entry/:id/delete', function(req,res){
         console.log("POST");
         console.log(req.body);
         var entryObject = req.body;
