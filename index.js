@@ -54,7 +54,7 @@ pg.connect(db, function(err, client){
         console.log("POST");
         console.log(req.body);
         var entryObject = req.body;
-        var id = request.params.id;
+        var id = req.params.id;
         console.log("DELETE FROM diary WHERE id = \'" + id + "\'" );
         client.query("DELETE FROM diary WHERE id = \'" + id + "\'");
         res.sendStatus(200);
