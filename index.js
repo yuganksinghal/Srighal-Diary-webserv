@@ -41,8 +41,8 @@ pg.connect(db, function(err, client){
         var id = req.param.id;
         entryObject.title=entryObject.title.replace(/'/g, "''");
         entryObject.entry=entryObject.entry.replace(/'/g, "''");
-        console.log("UPDATE diary TITLE = \'" + entryObject.title +'\', ENTRY = \'' + entryObject.entry +'\', GEOCACHE = \'' + entryObject.geocache + '\' , ENTRYDATE = \'' + entryObject.entrydate +'\' WHERE ID = \'' + entryObject.id.mUuid + '\');');
-        client.query("UPDATE diary TITLE = \'" + entryObject.title +'\', ENTRY = \'' + entryObject.entry +'\', GEOCACHE = \'' + entryObject.geocache + '\' , ENTRYDATE = \'' + entryObject.entrydate +'\' WHERE ID = \'' + entryObject.id.mUuid + '\');');
+        console.log("UPDATE diary SET TITLE = \'" + entryObject.title +'\', ENTRY = \'' + entryObject.entry +'\', GEOCACHE = \'' + entryObject.geocache + '\' , ENTRYDATE = \'' + entryObject.entrydate +'\' WHERE ID = \'' + entryObject.id.mUuid + '\');');
+        client.query("UPDATE diary SET TITLE = \'" + entryObject.title +'\', ENTRY = \'' + entryObject.entry +'\', GEOCACHE = \'' + entryObject.geocache + '\' , ENTRYDATE = \'' + entryObject.entrydate +'\' WHERE ID = \'' + entryObject.id.mUuid + '\');');
         res.sendStatus(200);
     });
     
