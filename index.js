@@ -55,8 +55,6 @@ pg.connect(db, function(err, client){
         console.log(req.body);
         var entryObject = req.body;
         var id = req.param.id;
-        entryObject.title=entryObject.title.replace(/'/g, "''");
-        entryObject.entry=entryObject.entry.replace(/'/g, "''");
         console.log("DELETE FROM diary WHERE id = \'" + id + "\'" );
         client.query("DELETE FROM diary WHERE id = \'" + id + "\'");
         res.sendStatus(200);
