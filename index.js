@@ -41,8 +41,8 @@ pg.connect(db, function(err, client){
         var id = req.param.id;
         entryObject.title=entryObject.title.replace(/'/g, "''");
         entryObject.entry=entryObject.entry.replace(/'/g, "''");
-        console.log("UPDATE diary SET TITLE = \'" + entryObject.title +'\', ENTRY = \'' + entryObject.entry +'\', GEOCACHE = \'' + entryObject.geocache + '\' , ENTRYDATE = \'' + entryObject.entrydate +'\' WHERE ID = \'' + entryObject.id.mUuid + '\';');
-        client.query("UPDATE diary SET TITLE = \'" + entryObject.title +'\', ENTRY = \'' + entryObject.entry +'\', GEOCACHE = \'' + entryObject.geocache + '\' , ENTRYDATE = \'' + entryObject.entrydate +'\' WHERE ID = \'' + entryObject.id.mUuid + '\';');
+        console.log("UPDATE diary SET TITLE = \'" + entryObject.title +'\', ENTRY = \'' + entryObject.entry +'\', GEOCACHE = \'' + entryObject.geocache + '\' , ENTRYDATE = \'' + entryObject.entrydate +'\' WHERE ID = \'' + entryObject.id + '\';');
+        client.query("UPDATE diary SET TITLE = \'" + entryObject.title +'\', ENTRY = \'' + entryObject.entry +'\', GEOCACHE = \'' + entryObject.geocache + '\' , ENTRYDATE = \'' + entryObject.entrydate +'\' WHERE ID = \'' + entryObject.id + '\';');
         res.sendStatus(200);
     });
     
@@ -52,8 +52,8 @@ pg.connect(db, function(err, client){
         var entryObject = req.body;
         entryObject.title=entryObject.title.replace(/'/g, "''");
         entryObject.entry=entryObject.entry.replace(/'/g, "''");
-        console.log("INSERT INTO diary VALUES(\'" + entryObject.id.mUuid + '\', \'' + entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entrydate+'\');');
-        client.query('INSERT INTO diary VALUES(\'' + entryObject.id.mUuid + '\', \'' + entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entrydate+'\');');
+        console.log("INSERT INTO diary VALUES(\'" + entryObject.id + '\', \'' + entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entrydate+'\');');
+        client.query('INSERT INTO diary VALUES(\'' + entryObject.id + '\', \'' + entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entrydate+'\');');
         res.sendStatus(200);
     });
 });
