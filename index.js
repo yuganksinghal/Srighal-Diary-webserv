@@ -11,7 +11,7 @@ var db = process.env.DATABASE_URL || 'postgres://vdmhzgburvczes:4a6UvEgPzqmLNlwA
 pg.connect(db, function(err, client){
     if (err) throw err;
 
-    client.query('DROP TABLE diary');
+    //client.query('DROP TABLE diary');
     client.query('CREATE TABLE diary(ID CHAR(36) PRIMARY KEY NOT NULL,TITLE CHAR(100) NOT NULL, ENTRY TEXT, GEOCACHE TEXT, ENTRYDATE TEXT);');
     
     app.get('/entry/all', function(req,res){
@@ -19,6 +19,10 @@ pg.connect(db, function(err, client){
         var queryResult;
         client.query('SELECT * FROM diary', function(err, result){
             var queryResult=result.rows;
+            for(var i = 0; i < queryResult.length; i++){
+                queryResult[i].title = queryResult[i].title.trim();
+                queryResult[i].entry = queryResult[i].entry.trim();
+            }
             console.log(result.rows);
             res.send(JSON.stringify(queryResult));
         });
@@ -46,6 +50,18 @@ pg.connect(db, function(err, client){
         res.sendStatus(200);
     });
     
+        app.post('/entry/:id/delete', function(req,res){
+        console.log("POST");
+        console.log(req.body);
+        var entryObject = req.body;
+        var id = req.param.id;
+        entryObject.title=entryObject.title.replace(/'/g, "''");
+        entryObject.entry=entryObject.entry.replace(/'/g, "''");
+        console.log("DELETE FROM diary WHERE id = \'" + id + "\'" );
+        client.query("DELETE FROM diary WHERE id = \'" + id + "\'");
+        res.sendStatus(200);
+    });
+    
      app.post('/entry/new', function(req,res){
         console.log("POST");
         console.log(req.body);
@@ -56,6 +72,8 @@ pg.connect(db, function(err, client){
         client.query('INSERT INTO diary VALUES(\'' + entryObject.id + '\', \'' + entryObject.title +'\', \'' + entryObject.entry +'\', \'' + entryObject.geocache + '\' , \'' + entryObject.entrydate+'\');');
         res.sendStatus(200);
     });
+    
+    
 });
 
 var port = process.env.PORT || 3000;
