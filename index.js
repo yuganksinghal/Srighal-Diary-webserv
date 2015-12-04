@@ -29,7 +29,7 @@ pg.connect(db, function(err, client){
     });
     
     app.get('/entry/:id', function(req, res){
-        var id = req.param.id;
+        var id = req.params.id;
         var queryResult;
         client.query('SELECT * FROM diary where id = ' + id, function(err, result){
             queryResult=result.rows;
@@ -42,7 +42,7 @@ pg.connect(db, function(err, client){
         console.log("POST");
         console.log(req.body);
         var entryObject = req.body;
-        var id = req.param.id;
+        var id = req.params.id;
         entryObject.title=entryObject.title.replace(/'/g, "''");
         entryObject.entry=entryObject.entry.replace(/'/g, "''");
         console.log("UPDATE diary SET TITLE = \'" + entryObject.title +'\', ENTRY = \'' + entryObject.entry +'\', GEOCACHE = \'' + entryObject.geocache + '\' , ENTRYDATE = \'' + entryObject.entrydate +'\' WHERE ID = \'' + entryObject.id + '\';');
